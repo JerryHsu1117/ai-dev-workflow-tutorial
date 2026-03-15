@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" \"E-commerce analytics dashboard for sales data visualization based on PRD\" -Json -ShortName \"sales-dashboard\" \"Sales Analytics Dashboard\")",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/create-new-feature.ps1\" \"Sales Analytics Dashboard\" -Json -ShortName \"sales-dashboard\")",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/setup-plan.ps1\" -Json)",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/update-agent-context.ps1\" -AgentType claude 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json 2>&1)",
+      "mcp__atlassian__getVisibleJiraProjects",
+      "mcp__atlassian__createJiraIssue",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && powershell.exe -ExecutionPolicy Bypass -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json -RequireTasks -IncludeTasks 2>&1)",
+      "mcp__atlassian__getTransitionsForJiraIssue",
+      "mcp__atlassian__transitionJiraIssue",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && mkdir -p src pages tests/unit tests/integration data .streamlit)",
+      "Bash(cd \"C:\\\\Users\\\\jerry\\\\Desktop\\\\GitHub Progect\\\\ai-dev-workflow-tutorial\" && uv sync 2>&1)"
+    ]
+  }
+}
