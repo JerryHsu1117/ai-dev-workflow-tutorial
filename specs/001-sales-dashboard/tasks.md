@@ -38,15 +38,15 @@ All three modules are tested and verified before user story page work begins.
 
 ### Tests for Foundational ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T005 [P] Write failing unit tests for all `src/data.py` functions (`load_data` happy path + schema errors, `apply_filters` date/category/combined/empty cases, `get_kpi_metrics` totals, `get_time_series` daily + monthly aggregations, `get_category_summary` sort order, `get_region_summary` sort order) in `tests/unit/test_data.py`
-- [ ] T006 [P] Write failing unit tests for all `src/charts.py` functions (`make_trend_chart` returns Plotly Figure with correct title + axes, `make_category_chart` horizontal bar with business-question title, `make_region_chart` horizontal bar with business-question title) in `tests/unit/test_charts.py`
-- [ ] T007 [P] Write failing unit tests for all `src/filters.py` functions (`init_filter_state` default values from dataset, idempotency; filter state dict structure) in `tests/unit/test_filters.py`
+- [x] T005 [P] Write failing unit tests for all `src/data.py` functions (`load_data` happy path + schema errors, `apply_filters` date/category/combined/empty cases, `get_kpi_metrics` totals, `get_time_series` daily + monthly aggregations, `get_category_summary` sort order, `get_region_summary` sort order) in `tests/unit/test_data.py`
+- [x] T006 [P] Write failing unit tests for all `src/charts.py` functions (`make_trend_chart` returns Plotly Figure with correct title + axes, `make_category_chart` horizontal bar with business-question title, `make_region_chart` horizontal bar with business-question title) in `tests/unit/test_charts.py`
+- [x] T007 [P] Write failing unit tests for all `src/filters.py` functions (`init_filter_state` default values from dataset, idempotency; filter state dict structure) in `tests/unit/test_filters.py`
 
 ### Implementation for Foundational
 
-- [ ] T008 Implement `src/data.py` — `load_data()` with `@st.cache_data` and schema validation, `apply_filters(df, filters)` AND logic returning empty DataFrame on no match, `get_kpi_metrics(df)`, `get_time_series(df, granularity)`, `get_category_summary(df)`, `get_region_summary(df)`
-- [ ] T009 [P] Implement `src/charts.py` — `make_trend_chart(df, granularity)` using `px.line` with title "Sales Over Time", `make_category_chart(df)` using horizontal `px.bar` with title "Which Categories Drive Revenue?", `make_region_chart(df)` using horizontal `px.bar` with title "Sales Performance by Region"
-- [ ] T010 [P] Implement `src/filters.py` — `init_filter_state(df)` idempotent session state init with date bounds and empty category list, `render_date_filter(df)` sidebar date inputs + Last 30 Days / Last 90 Days / Year to Date / All Time presets, `render_category_filter(df)` inline multiselect populated from dataset
+- [x] T008 Implement `src/data.py` — `load_data()` with `@st.cache_data` and schema validation, `apply_filters(df, filters)` AND logic returning empty DataFrame on no match, `get_kpi_metrics(df)`, `get_time_series(df, granularity)`, `get_category_summary(df)`, `get_region_summary(df)`
+- [x] T009 [P] Implement `src/charts.py` — `make_trend_chart(df, granularity)` using `px.line` with title "Sales Over Time", `make_category_chart(df)` using horizontal `px.bar` with title "Which Categories Drive Revenue?", `make_region_chart(df)` using horizontal `px.bar` with title "Sales Performance by Region"
+- [x] T010 [P] Implement `src/filters.py` — `init_filter_state(df)` idempotent session state init with date bounds and empty category list, `render_date_filter(df)` sidebar date inputs + Last 30 Days / Last 90 Days / Year to Date / All Time presets, `render_category_filter(df)` inline multiselect populated from dataset
 
 **Checkpoint**: `uv run pytest tests/unit/` — all unit tests pass. The entire `src/` package is verified before any page is written.
 
