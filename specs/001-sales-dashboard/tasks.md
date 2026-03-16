@@ -61,11 +61,11 @@ with no filters applied. Values must match manual CSV calculations.
 
 ### Tests for US1 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T011 [US1] Write failing AppTest for KPI scorecards in `tests/integration/test_home.py` — assert Total Sales displays as currency string, Total Orders as integer, both visible without filter interaction
+- [x] T011 [US1] Write failing AppTest for KPI scorecards in `tests/integration/test_home.py` — assert Total Sales displays as currency string, Total Orders as integer, both visible without filter interaction
 
 ### Implementation for US1
 
-- [ ] T012 [US1] Implement KPI display in `dashboard.py` — call `load_data()`, `init_filter_state(df)`, `render_date_filter(df)` (sidebar), `get_kpi_metrics(df)`, display with `st.metric`; show `st.error()` on load failure; `st.set_page_config(page_title="ShopSmart Sales Dashboard", layout="wide")`
+- [x] T012 [US1] Implement KPI display in `dashboard.py` — call `load_data()`, `init_filter_state(df)`, `render_date_filter(df)` (sidebar), `get_kpi_metrics(df)`, display with `st.metric`; show `st.error()` on load failure; `st.set_page_config(page_title="ShopSmart Sales Dashboard", layout="wide")`
 
 **Checkpoint**: `uv run pytest tests/integration/test_home.py` — US1 tests pass.
 Dashboard shows correct KPI values. Deployable as MVP.
