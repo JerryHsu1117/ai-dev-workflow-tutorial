@@ -82,11 +82,11 @@ totals. Toggle to daily; verify one data point per day. Hover tooltip shows exac
 
 ### Tests for US2 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T013 [US2] Write failing AppTest for trend chart presence and granularity radio button in `tests/integration/test_home.py` — assert chart renders, toggle exists with Monthly/Daily options, selecting Daily changes chart data
+- [x] T013 [US2] Write failing AppTest for trend chart presence and granularity radio button in `tests/integration/test_home.py` — assert chart renders, toggle exists with Monthly/Daily options, selecting Daily changes chart data
 
 ### Implementation for US2
 
-- [ ] T014 [US2] Add trend chart and granularity toggle to `dashboard.py` — `st.radio` for granularity stored in `st.session_state["trend_granularity"]` (default "Monthly"), call `get_time_series(filtered_df, granularity)`, render with `make_trend_chart()`; pass date-filtered df from existing filter wiring
+- [x] T014 [US2] Add trend chart and granularity toggle to `dashboard.py` — `st.radio` for granularity stored in `st.session_state["trend_granularity"]` (default "Monthly"), call `get_time_series(filtered_df, granularity)`, render with `make_trend_chart()`; pass date-filtered df from existing filter wiring
 
 **Checkpoint**: `uv run pytest tests/integration/test_home.py` — US1 + US2 tests pass.
 Granularity toggle re-renders chart without page reload.
