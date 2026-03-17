@@ -103,11 +103,11 @@ categories and 4 regions sorted by sales descending. Chart totals match CSV aggr
 
 ### Tests for US3 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T015 [US3] Write failing AppTest for Segment Analysis page in `tests/integration/test_segment.py` — assert page title visible, both charts present, category multiselect widget exists
+- [x] T015 [US3] Write failing AppTest for Segment Analysis page in `tests/integration/test_segment.py` — assert page title visible, both charts present, category multiselect widget exists
 
 ### Implementation for US3
 
-- [ ] T016 [US3] Implement `pages/1_Segment_Analysis.py` — `st.set_page_config`, call `load_data()`, `init_filter_state(df)`, `render_date_filter(df)` (sidebar), `render_category_filter(df)` (inline above category chart), `apply_filters(df, filters)`, display category and region charts side-by-side using `st.columns(2)` with `make_category_chart()` and `make_region_chart()`
+- [x] T016 [US3] Implement `pages/1_Segment_Analysis.py` — `st.set_page_config`, call `load_data()`, `init_filter_state(df)`, `render_date_filter(df)` (sidebar), `render_category_filter(df)` (inline above category chart), `apply_filters(df, filters)`, display category and region charts side-by-side using `st.columns(2)` with `make_category_chart()` and `make_region_chart()`
 
 **Checkpoint**: `uv run pytest tests/integration/test_segment.py` — US3 tests pass.
 Navigate to Segment Analysis in browser; both charts render with correct sorted data.
