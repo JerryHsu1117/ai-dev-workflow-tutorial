@@ -142,9 +142,9 @@ simultaneously; all four components update. Clear filters; full dataset values r
 
 **Purpose**: Final validation and quality pass.
 
-- [ ] T021 [P] Verify no raw column names appear in any user-facing element across `dashboard.py` and `pages/1_Segment_Analysis.py` (chart axes, labels, KPI titles must use business language per Constitution Principle II)
-- [ ] T022 Run complete test suite: `uv run pytest -v` — zero failures, zero warnings
-- [ ] T023 Run quickstart.md validation checklist — install fresh via `uv sync`, run `streamlit run dashboard.py`, verify all 8 checklist items pass manually
+- [x] T021 [P] Verify no raw column names appear in any user-facing element across `dashboard.py` and `pages/1_Segment_Analysis.py` (chart axes, labels, KPI titles must use business language per Constitution Principle II)
+- [x] T022 Run complete test suite: `uv run pytest -v` — zero failures, zero warnings
+- [x] T023 Run quickstart.md validation checklist — install fresh via `uv sync`, run `streamlit run dashboard.py`, verify all 8 checklist items pass manually
 
 ---
 
