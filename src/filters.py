@@ -38,16 +38,19 @@ def render_date_filter(df: pd.DataFrame) -> None:
         st.session_state["filters"]["date_start"] = min_date
         st.session_state["filters"]["date_end"] = max_date
 
+    current_start = st.session_state["filters"].get("date_start") or min_date
+    current_end = st.session_state["filters"].get("date_end") or max_date
+
     start = st.sidebar.date_input(
         "Start Date",
-        value=st.session_state["filters"]["date_start"],
+        value=current_start,
         min_value=min_date,
         max_value=max_date,
         key="date_start_input",
     )
     end = st.sidebar.date_input(
         "End Date",
-        value=st.session_state["filters"]["date_end"],
+        value=current_end,
         min_value=min_date,
         max_value=max_date,
         key="date_end_input",

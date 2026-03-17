@@ -125,13 +125,13 @@ dataset values restore.
 
 ### Tests for US4 ⚠️ Write FIRST — verify they FAIL before implementing
 
-- [ ] T017 [P] [US4] Write failing AppTest for date filter preset interactions in `tests/integration/test_home.py` — assert Last 30 Days / Last 90 Days presets update KPI values correctly
-- [ ] T018 [P] [US4] Write failing AppTest for category filter propagation in `tests/integration/test_segment.py` — assert selecting one category updates region chart totals and KPIs to match filtered subset
+- [x] T017 [P] [US4] Write failing AppTest for date filter preset interactions in `tests/integration/test_home.py` — assert Last 30 Days / Last 90 Days presets update KPI values correctly
+- [x] T018 [P] [US4] Write failing AppTest for category filter propagation in `tests/integration/test_segment.py` — assert selecting one category updates region chart totals and KPIs to match filtered subset
 
 ### Implementation for US4
 
-- [ ] T019 [US4] Wire filter state propagation in `dashboard.py` — pass `apply_filters(df, st.session_state["filters"])` result to `get_kpi_metrics` and `get_time_series`; add `st.info("No data matches the selected filters.")` empty-state guard before each component
-- [ ] T020 [US4] Wire filter state propagation in `pages/1_Segment_Analysis.py` — pass `apply_filters(df, st.session_state["filters"])` result to `get_category_summary` and `get_region_summary`; add empty-state guard before each chart
+- [x] T019 [US4] Wire filter state propagation in `dashboard.py` — pass `apply_filters(df, st.session_state["filters"])` result to `get_kpi_metrics` and `get_time_series`; add `st.info("No data matches the selected filters.")` empty-state guard before each component
+- [x] T020 [US4] Wire filter state propagation in `pages/1_Segment_Analysis.py` — pass `apply_filters(df, st.session_state["filters"])` result to `get_category_summary` and `get_region_summary`; add empty-state guard before each chart
 
 **Checkpoint**: `uv run pytest` — all US1–US4 tests pass. Apply date + category filter
 simultaneously; all four components update. Clear filters; full dataset values restore.

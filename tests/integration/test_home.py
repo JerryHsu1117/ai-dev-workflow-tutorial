@@ -1,4 +1,5 @@
-"""Integration tests for dashboard.py (Home page) — ECOM-7/ECOM-8"""
+"""Integration tests for dashboard.py (Home page) — ECOM-7/ECOM-8/ECOM-10"""
+from datetime import date
 import pytest
 from streamlit.testing.v1 import AppTest
 
@@ -100,3 +101,51 @@ def test_switching_to_daily_rerenders_chart(app):
     assert len(app.error) == 0, f"Errors after switching to Daily: {[e.value for e in app.error]}"
     charts = app.get("plotly_chart")
     assert len(charts) > 0, "Chart disappeared after switching to Daily"
+
+
+# ---------------------------------------------------------------------------
+# US4: Date Filter Propagation
+# ---------------------------------------------------------------------------
+
+def test_date_filter_reduces_total_orders():
+    """Narrowing date range to January 2024 reduces Total Orders from 482 to 40."""
+    at = AppTest.from_file("dashboard.py", default_timeout=30)
+    at.session_state["filters"] = {
+        "date_start": date(2024, 1, 3),   # dataset starts 2024-01-03
+        "date_end": date(2024, 1, 31),
+        "selected_categories": [],
+    }
+    at.run()
+    assert len(at.error) == 0, f"Errors with date filter: {[e.value for e in at.error]}"
+    orders_metric = next(m for m in at.metric if "orders" in m.label.lower())
+    orders = int(orders_metric.value.replace(",", ""))
+    assert orders == 40, f"Expected 40 orders for Jan 2024, got {orders}"
+
+
+def test_date_filter_reduces_total_sales():
+    """Narrowing date range to January 2024 reduces Total Sales below full-dataset value."""
+    at = AppTest.from_file("dashboard.py", default_timeout=30)
+    at.session_state["filters"] = {
+        "date_start": date(2024, 1, 3),   # dataset starts 2024-01-03
+        "date_end": date(2024, 1, 31),
+        "selected_categories": [],
+    }
+    at.run()
+    sales_metric = next(m for m in at.metric if "sales" in m.label.lower())
+    sales = float(sales_metric.value.replace("$", "").replace(",", ""))
+    assert sales < 116500, f"Expected sales < full-dataset $116,500, got ${sales:,.2f}"
+    assert sales > 0, "Expected non-zero sales for January 2024"
+
+
+def test_empty_date_range_shows_info_not_error():
+    """A date that has no transactions shows st.info() empty-state, not st.error()."""
+    at = AppTest.from_file("dashboard.py", default_timeout=30)
+    # 2024-01-13 is a known day with no transactions in the dataset
+    at.session_state["filters"] = {
+        "date_start": date(2024, 1, 13),
+        "date_end": date(2024, 1, 13),
+        "selected_categories": [],
+    }
+    at.run()
+    assert len(at.error) == 0, "Expected no st.error() for empty filter result"
+    assert len(at.info) > 0, "Expected st.info() empty-state message"

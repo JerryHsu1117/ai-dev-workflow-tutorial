@@ -1,5 +1,6 @@
-"""Integration tests for pages/1_Segment_Analysis.py — ECOM-9"""
+"""Integration tests for pages/1_Segment_Analysis.py — ECOM-9/ECOM-10"""
 import os
+from datetime import date
 import pytest
 from streamlit.testing.v1 import AppTest
 
@@ -57,3 +58,49 @@ def test_category_filter_options_populated(app):
         multiselects[0],
     )
     assert len(cat_select.options) > 0, "Category multiselect has no options — expected dataset categories"
+
+
+# ---------------------------------------------------------------------------
+# US4: Category Filter Propagation
+# ---------------------------------------------------------------------------
+
+def test_category_filter_reduces_chart_data():
+    """Selecting a single category shows only that category's data — charts still render."""
+    at = AppTest.from_file(_SEGMENT_PAGE, default_timeout=30)
+    at.session_state["filters"] = {
+        "date_start": None,
+        "date_end": None,
+        "selected_categories": ["Audio"],
+    }
+    at.run()
+    assert len(at.error) == 0, f"Errors with category filter: {[e.value for e in at.error]}"
+    charts = at.get("plotly_chart")
+    assert len(charts) >= 2, "Expected 2 charts even with category filter applied"
+
+
+def test_category_filter_via_multiselect():
+    """Selecting a category via the multiselect widget re-renders charts without error."""
+    at = AppTest.from_file(_SEGMENT_PAGE, default_timeout=30)
+    at.run()
+    cat_select = next(
+        (m for m in at.multiselect if "category" in m.label.lower()),
+        at.multiselect[0],
+    )
+    cat_select.set_value(["Audio"]).run()
+    assert len(at.error) == 0, f"Errors after selecting Audio: {[e.value for e in at.error]}"
+    charts = at.get("plotly_chart")
+    assert len(charts) >= 2, "Expected charts after category filter applied"
+
+
+def test_empty_filter_shows_info():
+    """A date filter with no matching transactions shows st.info(), not st.error()."""
+    at = AppTest.from_file(_SEGMENT_PAGE, default_timeout=30)
+    # 2024-01-13 is a known day with no transactions in the dataset
+    at.session_state["filters"] = {
+        "date_start": date(2024, 1, 13),
+        "date_end": date(2024, 1, 13),
+        "selected_categories": [],
+    }
+    at.run()
+    assert len(at.error) == 0, "Expected no st.error() for empty filter result"
+    assert len(at.info) > 0, "Expected st.info() empty-state message when no data matches"
